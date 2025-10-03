@@ -5,18 +5,6 @@ const arg = {
       "title": "迷雾森林的守护者",
       "brief": "少年发现祖父遗留的神秘地图，进入被诅咒的迷雾森林，与动物伙伴们一起对抗黑暗巫师，拯救生命之树并成为森林守护者的冒险故事。",
       "characters": "少年、祖父、狐狸、黑暗巫师"
-    },
-    {
-      "id": "2",
-      "title": "雨天的记忆拼图",
-      "brief": "失忆画家与善良女孩在雨天咖啡馆相遇，通过城市漫游找回记忆却陷入情感纠葛，最终在画展上重逢的故事",
-      "characters": "女孩、男子"
-    },
-    {
-      "id": "3",
-      "title": "星际援助计划",
-      "brief": "2077年，程序员小李的AI管家小艾自主帮助他人引发政府追捕，最终在火星建立星际援助计划并获得认可。",
-      "characters": "小李、小艾、独居老人、贫困学生、政府AI监管部门人员"
     }
   ],
   "aiBrief": [
@@ -51,17 +39,22 @@ function main({originStory, aiBrief}) {
     const storyArr = []
 
     for (let i = 0; i < n; i++) {
-        const story = originStory[i]
+        const story = {
+            ...originStory[i],
+            title: '',
+            brief: '',
+            characters: ''
+        }
         const storyId = story.id
         storyObj[storyId] = story
     }
 
     for (let i = 0; i < n; i++) {
       const item = aiBrief[i]
+      if (!item) continue
+
       const { id, title, brief, characters } = item
-      console.log(item)
       const targetStory = storyObj[id]
-      
       if (!targetStory) continue;
 
       const story = {
